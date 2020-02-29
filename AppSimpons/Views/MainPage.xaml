@@ -16,9 +16,7 @@
     </ContentPage.BindingContext>
 
     <ContentPage.Resources>
-        <ResourceDictionary>
-            <helpers:uriToImageConverter  x:Key="uriToImageConverter"/>
-        </ResourceDictionary>
+        <helpers:uriToImageConverter  x:Key="convertidor"/>
     </ContentPage.Resources>
 
     <ScrollView>
@@ -55,7 +53,7 @@
 
                         <pancake:PancakeView CornerRadius="10" WidthRequest="150">
                             <Grid>
-                                <Image Source="{Binding Numero, StringFormat='temporada{0}.png'}" Aspect="Fill"/>
+                                <Image Source="{Binding Numero, Converter={StaticResource convertidor}}" Aspect="Fill"/>
                                 <g:GradientView Margin="0">
                                     <g:GradientView.GradientSource>
                                         <g:LinearGradient>

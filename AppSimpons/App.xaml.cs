@@ -6,9 +6,16 @@ namespace AppSimpons
 {
     public partial class App : Application
     {
+        public static AppSimpons.Models.TheSimpson TheSimpson { get; set; } = new AppSimpons.Models.TheSimpson();
         public App()
         {
             InitializeComponent();
+            Cargar();
+        }
+
+        public async void Cargar()
+        {
+            await TheSimpson.DescargarTemporadas();
             Device.SetFlags(new string[]
             {
                 "CarouselView_Experimental"

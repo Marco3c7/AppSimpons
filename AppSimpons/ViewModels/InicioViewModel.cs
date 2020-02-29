@@ -10,7 +10,7 @@ namespace AppSimpons.ViewModels
 {
     public class InicioViewModel
     {
-        public List<Temporada> Temporadas { get; set; }
+        public ObservableCollection<Temporada> Temporadas { get; set; } = new ObservableCollection<Temporada>();
         public ObservableCollection<Capitulo> Capitulos { get; set; }
 
         public Command VerTemporadasCommand { get; set; }
@@ -20,123 +20,7 @@ namespace AppSimpons.ViewModels
         {
             VerTemporadasCommand = new Command(VerTemporadas);
             CancelarCommand = new Command(Cancelar);
-            Temporadas = new List<Temporada>
-            {
-                new Temporada
-                {
-                    Numero = 1,
-                    TotalEpisodios = 14,
-                    Periodo = "1998-1990"
-                },
-                new Temporada
-                {
-                    Numero = 2,
-                    TotalEpisodios = 14,
-                    Periodo = "1998-1990"
-                },
-                new Temporada
-                {
-                    Numero = 3,
-                    TotalEpisodios = 14,
-                    Periodo = "1998-1990"
-                },
-                new Temporada
-                {
-                    Numero = 4,
-                    TotalEpisodios = 14,
-                    Periodo = "1998-1990"
-                },
-                new Temporada
-                {
-                    Numero = 5,
-                    TotalEpisodios = 14,
-                    Periodo = "1998-1990"
-                },
-                new Temporada
-                {
-                    Numero = 6,
-                    TotalEpisodios = 14,
-                    Periodo = "1998-1990"
-                },
-                new Temporada
-                {
-                    Numero = 7,
-                    TotalEpisodios = 14,
-                    Periodo = "1998-1990"
-                },
-                 new Temporada
-                {
-                    Numero = 5,
-                    TotalEpisodios = 14,
-                    Periodo = "1998-1990"
-                },
-                new Temporada
-                {
-                    Numero = 6,
-                    TotalEpisodios = 14,
-                    Periodo = "1998-1990"
-                },
-                new Temporada
-                {
-                    Numero = 7,
-                    TotalEpisodios = 14,
-                    Periodo = "1998-1990"
-                },
-                 new Temporada
-                {
-                    Numero = 5,
-                    TotalEpisodios = 14,
-                    Periodo = "1998-1990"
-                },
-                new Temporada
-                {
-                    Numero = 6,
-                    TotalEpisodios = 14,
-                    Periodo = "1998-1990"
-                },
-                new Temporada
-                {
-                    Numero = 7,
-                    TotalEpisodios = 14,
-                    Periodo = "1998-1990"
-                },
-                 new Temporada
-                {
-                    Numero = 5,
-                    TotalEpisodios = 14,
-                    Periodo = "1998-1990"
-                },
-                new Temporada
-                {
-                    Numero = 6,
-                    TotalEpisodios = 14,
-                    Periodo = "1998-1990"
-                },
-                new Temporada
-                {
-                    Numero = 7,
-                    TotalEpisodios = 14,
-                    Periodo = "1998-1990"
-                },
-                 new Temporada
-                {
-                    Numero = 5,
-                    TotalEpisodios = 14,
-                    Periodo = "1998-1990"
-                },
-                new Temporada
-                {
-                    Numero = 6,
-                    TotalEpisodios = 14,
-                    Periodo = "1998-1990"
-                },
-                new Temporada
-                {
-                    Numero = 7,
-                    TotalEpisodios = 14,
-                    Periodo = "1998-1990"
-                },
-            };
+            Temporadas = App.TheSimpson.GetTemporadas();
             Capitulos = new ObservableCollection<Capitulo>
             {
                 new Capitulo
