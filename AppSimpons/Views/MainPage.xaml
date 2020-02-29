@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:v="clr-namespace:AppSimpons.ViewModels"
+             xmlns:g="clr-namespace:MagicGradients;assembly=MagicGradients"
+             xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:helpers="clr-namespace:AppSimpons.Helpers"
+             x:Name="ventana"
+             x:Class="AppSimpons.MainPage" BackgroundColor="#1E1E1E" NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.BindingContext>
+        <v:InicioViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <helpers:uriToImageConverter  x:Key="uriToImageConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <StackLayout>
+            <!--<Image Source="background.png" HorizontalOptions="FillAndExpand"/>-->
+            <Image Source="wallpaper.png" HorizontalOptions="FillAndExpand" x:Name="wallpaper"/>
+            <!--<Image Source="Grupo26.png" HorizontalOptions="FillAndExpand"/>-->
+
+            <Image Source="logo.png" HeightRequest="90" Margin="0,-55,0,0" HorizontalOptions="Center"/>
+
+
+            <!--Temporadas-->
+            <FlexLayout Direction="Row" JustifyContent="SpaceBetween" Margin="20,10,0,0" AlignItems="Center">
+                <Label Text="Temporadas" TextColor="White"
+                   FontSize="Title" FontFamily="Segoe UI"
+                   FontAttributes="Bold"/>
+
+                <Frame CornerRadius="50" BackgroundColor="Transparent">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding VerTemporadasCommand}"/>
+                    </Frame.GestureRecognizers>
+                    <Image Source="go.png" HeightRequest="22" />
+                </Frame>
+            </FlexLayout>
+
+            <CollectionView ItemsSource="{Binding Temporadas}" HeightRequest="240" Margin="20,0,0,0">
+
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Horizontal" Span="1" HorizontalItemSpacing="14"/>
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+
+                        <pancake:PancakeView CornerRadius="10" WidthRequest="150">
+                            <Grid>
+                                <Image Source="{Binding Numero, StringFormat='temporada{0}.png'}" Aspect="Fill"/>
+                                <g:GradientView Margin="0">
+                                    <g:GradientView.GradientSource>
+                                        <g:LinearGradient>
+                                            <g:GradientStop Color="Transparent" Offset="0" />
+                                            <g:GradientStop Color="Transparent" Offset="0.5" />
+                                            <g:GradientStop Color="#242424" Offset="1" />
+                                        </g:LinearGradient>
+                                    </g:GradientView.GradientSource>
+                                </g:GradientView>
+                                <FlexLayout Direction="Column" JustifyContent="End" Margin="10,10">
+                                    <StackLayout Spacing="1">
+                                        <Label Text="{Binding Numero, StringFormat='Temporada {0}'}"
+                                               TextColor="White" FontSize="Subtitle" FontAttributes="Bold" FontFamily="Segoe UI"/>
+
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="{Binding TotalEpisodios, StringFormat='{0} Capitulos'}"
+                                                   TextColor="White" FontSize="11"/>
+
+                                            <!--<Label Text="{Binding Periodo}"
+                                                   TextColor="White" FontSize="11"/>-->
+                                        </StackLayout>
+                                    </StackLayout>
+                                </FlexLayout>
+                            </Grid>
+                        </pancake:PancakeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!--Capitulos-->
+            <FlexLayout Direction="Row" JustifyContent="SpaceBetween" Margin="30,15,0,0" AlignItems="Center">
+                <Label Text="Capitulos" TextColor="White"
+                   FontSize="Title" FontFamily="Segoe UI"
+                   FontAttributes="Bold"/>
+
+                <Frame CornerRadius="50" BackgroundColor="Transparent" >
+                    <Image Source="go.png" HeightRequest="22" />
+                </Frame>
+            </FlexLayout>
+
+            <CollectionView ItemsSource="{Binding Capitulos}" HeightRequest="240" Margin="20,0,0,20">
+
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Horizontal" Span="1" HorizontalItemSpacing="14"/>
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+
+                        <pancake:PancakeView CornerRadius="10" WidthRequest="150">
+                            <Grid>
+                                <Image Source="{Binding Imagen}" Aspect="AspectFill"/>
+                                <g:GradientView Margin="0">
+                                    <g:GradientView.GradientSource>
+                                        <g:LinearGradient>
+                                            <g:GradientStop Color="Transparent" Offset="0" />
+                                            <g:GradientStop Color="Transparent" Offset="0.5" />
+                                            <g:GradientStop Color="#242424" Offset="1" />
+                                        </g:LinearGradient>
+                                    </g:GradientView.GradientSource>
+                                </g:GradientView>
+                                <FlexLayout Direction="Column" JustifyContent="End" Margin="10,10">
+                                    <StackLayout Spacing="1">
+                                        <Label Text="{Binding Titulo}"
+                                               TextColor="White" FontSize="Subtitle" FontAttributes="Bold" FontFamily="Segoe UI"/>
+
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="{Binding Minutos, StringFormat='{0} minutos'}"
+                                                   TextColor="White" FontSize="11"/>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </FlexLayout>
+                            </Grid>
+                        </pancake:PancakeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>

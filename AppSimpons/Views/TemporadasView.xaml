@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:v="clr-namespace:AppSimpons.ViewModels"
+             xmlns:g="clr-namespace:MagicGradients;assembly=MagicGradients"
+             xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             x:Class="AppSimpons.Views.TemporadasView" BackgroundColor="#1E1E1E" NavigationPage.HasNavigationBar="False">
+    <ContentPage.BindingContext>
+        <v:InicioViewModel/>
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <Grid>
+
+            <StackLayout>
+
+                <Image Source="temporadaswallpaper.png" HorizontalOptions="FillAndExpand"/>
+
+                <Image Source="logo.png" HeightRequest="90" Margin="0,-55,0,0" HorizontalOptions="Center"/>
+
+                <!--Temporadas-->
+                <Label Text="Temporadas" TextColor="White"
+                   FontSize="Title" FontFamily="Segoe UI"
+                   FontAttributes="Bold" Margin="20,15,0,10"/>
+
+
+                <CollectionView ItemsSource="{Binding Temporadas}" Margin="20,0,20,5">
+
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical" Span="3" HorizontalItemSpacing="10" VerticalItemSpacing="14"/>
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+
+                            <!--<pancake:PancakeView CornerRadius="10" WidthRequest="150">-->
+                            <pancake:PancakeView CornerRadius="10" HeightRequest="150">
+                                <Grid>
+                                    <Image Source="{Binding Numero, StringFormat='temporada{0}.png'}" Aspect="Fill"/>
+                                    <g:GradientView Margin="0">
+                                        <g:GradientView.GradientSource>
+                                            <g:LinearGradient>
+                                                <g:GradientStop Color="Transparent" Offset="0" />
+                                                <g:GradientStop Color="Transparent" Offset="0.5" />
+                                                <g:GradientStop Color="#242424" Offset="1" />
+                                            </g:LinearGradient>
+                                        </g:GradientView.GradientSource>
+                                    </g:GradientView>
+                                    <FlexLayout Direction="Column" JustifyContent="End" Margin="10,10">
+                                        <StackLayout Spacing="1">
+                                            <Label Text="{Binding Numero, StringFormat='T{0}'}"
+                                               TextColor="White" FontSize="Subtitle" FontAttributes="Bold" FontFamily="Segoe UI"/>
+
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label Text="{Binding TotalEpisodios, StringFormat='{0} Capitulos'}"
+                                                   TextColor="White" FontSize="11"/>
+
+                                                <!--<Label Text="{Binding Periodo}"
+                                                   TextColor="White" FontSize="11"/>-->
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </FlexLayout>
+                                </Grid>
+                            </pancake:PancakeView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+            <Frame CornerRadius="50" BackgroundColor="Transparent" HorizontalOptions="Start" VerticalOptions="Start" Margin="0,10,0,0">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding CancelarCommand}"/>
+                </Frame.GestureRecognizers>
+                <Image Source="back.png" HeightRequest="22"/>
+            </Frame>
+        </Grid>
+    </ScrollView>
+</ContentPage>
