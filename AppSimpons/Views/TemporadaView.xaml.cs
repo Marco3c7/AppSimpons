@@ -11,9 +11,9 @@ using Xamarin.Forms.Xaml;
 namespace AppSimpons.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class TemporadasView : AnimationPage
+    public partial class TemporadaView : AnimationPage
     {
-        public TemporadasView()
+        public TemporadaView()
         {
             InitializeComponent();
         }

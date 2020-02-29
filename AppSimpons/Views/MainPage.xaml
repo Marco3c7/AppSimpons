@@ -16,17 +16,13 @@
     </ContentPage.BindingContext>
 
     <ContentPage.Resources>
-        <helpers:uriToImageConverter  x:Key="convertidor"/>
+        <helpers:uriToImageConverter x:Key="numeroToImageConverter"/>
     </ContentPage.Resources>
 
     <ScrollView>
         <StackLayout>
-            <!--<Image Source="background.png" HorizontalOptions="FillAndExpand"/>-->
             <Image Source="wallpaper.png" HorizontalOptions="FillAndExpand" x:Name="wallpaper"/>
-            <!--<Image Source="Grupo26.png" HorizontalOptions="FillAndExpand"/>-->
-
             <Image Source="logo.png" HeightRequest="90" Margin="0,-55,0,0" HorizontalOptions="Center"/>
-
 
             <!--Temporadas-->
             <FlexLayout Direction="Row" JustifyContent="SpaceBetween" Margin="20,10,0,0" AlignItems="Center">
@@ -50,10 +46,12 @@
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-
                         <pancake:PancakeView CornerRadius="10" WidthRequest="150">
+                            <pancake:PancakeView.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={x:Reference ventana}, Path=BindingContext.VerTemporadaCommand}" CommandParameter="{Binding .}"/>
+                            </pancake:PancakeView.GestureRecognizers>
                             <Grid>
-                                <Image Source="{Binding Numero, Converter={StaticResource convertidor}}" Aspect="Fill"/>
+                                <Image Source="{Binding Numero, Converter={StaticResource Key=numeroToImageConverter}}" Aspect="Fill"/>
                                 <g:GradientView Margin="0">
                                     <g:GradientView.GradientSource>
                                         <g:LinearGradient>
@@ -85,7 +83,7 @@
 
             <!--Capitulos-->
             <FlexLayout Direction="Row" JustifyContent="SpaceBetween" Margin="30,15,0,0" AlignItems="Center">
-                <Label Text="Capitulos" TextColor="White"
+                <Label Text="Episodios" TextColor="White"
                    FontSize="Title" FontFamily="Segoe UI"
                    FontAttributes="Bold"/>
 

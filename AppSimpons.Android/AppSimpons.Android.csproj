@@ -67,6 +67,9 @@
     <PackageReference Include="Xamarin.Forms.PancakeView">
       <Version>1.3.7</Version>
     </PackageReference>
+    <PackageReference Include="XForms.Plugin.AnimationNavigationPage">
+      <Version>1.0.8</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
@@ -96,7 +99,9 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\icon.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\temporadaswallpaper.png" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AppSimpons\AppSimpons.csproj">
       <Project>{94B8DAE4-8F51-4904-A1EB-F0B854F058D7}</Project>
@@ -117,6 +122,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\wallpaper2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\temporada1full.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

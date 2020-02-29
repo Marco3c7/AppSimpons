@@ -14,11 +14,13 @@ namespace AppSimpons.ViewModels
         public ObservableCollection<Capitulo> Capitulos { get; set; }
 
         public Command VerTemporadasCommand { get; set; }
+        public Command<Temporada> VerTemporadaCommand { get; set; }
         public Command CancelarCommand { get; set; }
 
         public InicioViewModel()
         {
             VerTemporadasCommand = new Command(VerTemporadas);
+            VerTemporadaCommand = new Command<Temporada>(VerTemporada);
             CancelarCommand = new Command(Cancelar);
             Temporadas = App.TheSimpson.GetTemporadas();
             Capitulos = new ObservableCollection<Capitulo>
@@ -56,6 +58,15 @@ namespace AppSimpons.ViewModels
             };
         }
 
+        TemporadaView temporadaView;
+        private void VerTemporada(Temporada temporada)
+        {
+            if (temporadaView == null)
+                temporadaView = new TemporadaView();
+
+            App.Current.MainPage.Navigation.PushAsync(temporadaView);
+        }
+
         private async void Cancelar()
         {
             await App.Current.MainPage.Navigation.PopAsync();
@@ -65,9 +76,8 @@ namespace AppSimpons.ViewModels
         private void VerTemporadas()
         {
             if (temporadasView == null)
-            {
                 temporadasView = new TemporadasView();
-            }
+
             App.Current.MainPage.Navigation.PushAsync(temporadasView);
         }
     }

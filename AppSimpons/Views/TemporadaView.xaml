@@ -5,54 +5,72 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              xmlns:controls="clr-namespace:FormsControls.Base;assembly=FormsControls.Base"
-             xmlns:v="clr-namespace:AppSimpons.ViewModels"
              xmlns:g="clr-namespace:MagicGradients;assembly=MagicGradients"
-             xmlns:helpers="clr-namespace:AppSimpons.Helpers"
              xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
-             x:Class="AppSimpons.Views.TemporadasView" BackgroundColor="#1E1E1E" x:Name="ventana" NavigationPage.HasNavigationBar="False">
+             xmlns:v="clr-namespace:AppSimpons.ViewModels" 
+             xmlns:helpers="clr-namespace:AppSimpons.Helpers"
+             x:Class="AppSimpons.Views.TemporadaView" BackgroundColor="#1E1E1E" x:Name="ventana" NavigationPage.HasNavigationBar="False">
 
     <controls:AnimationPage.PageAnimation>
-        <controls:PushPageAnimation Duration="Short" Subtype="FromRight"/>
+        <controls:FadePageAnimation Duration="Short"/>
     </controls:AnimationPage.PageAnimation>
-
-    <controls:AnimationPage.Resources>
-        <helpers:uriToImageConverter x:Key="numeroToImageConverter"/>
-    </controls:AnimationPage.Resources>
 
     <controls:AnimationPage.BindingContext>
         <v:InicioViewModel/>
     </controls:AnimationPage.BindingContext>
 
+    <controls:AnimationPage.Resources>
+        <ResourceDictionary>
+            <helpers:tituloToTituloCortoConverter x:Key="tituloConverter"/>
+        </ResourceDictionary>
+    </controls:AnimationPage.Resources>
+
     <ScrollView>
         <Grid>
+
             <StackLayout>
 
-                <Image Source="temporadaswallpaper.png" HorizontalOptions="FillAndExpand"/>
+                <Grid>
+                    <Image Source="temporada1full.png" HorizontalOptions="FillAndExpand"/>
+                    <g:GradientView>
+                        <g:GradientView.GradientSource>
+                            <g:LinearGradient>
+                                <g:GradientStop Color="#1E1E1E" Offset="0"/>
+                                <g:GradientStop Color="Transparent" Offset="0.5" />
+                                <g:GradientStop Color="Transparent" Offset="0.6" />
+                                <g:GradientStop Color="#1E1E1E" Offset="1" />
+                            </g:LinearGradient>
+                        </g:GradientView.GradientSource>
+                    </g:GradientView>
+                </Grid>
 
-                <Image Source="logo.png" HeightRequest="90" Margin="0,-55,0,0" HorizontalOptions="Center"/>
+                <Label Text="Los Simpson: Temporada 1" TextColor="White"
+                   FontSize="25" FontFamily="Segoe UI"
+                   FontAttributes="Bold" Margin="20,-28,0,0"/>
 
-                <!--Temporadas-->
-                <Label Text="Temporadas" TextColor="White"
+                <StackLayout Orientation="Horizontal" Margin="22,-5,0,0">
+                    <Label Text="14 episodios" TextColor="#BEBEBE" FontFamily="Segoe UI" Margin="0,0,7,0"/>
+                    <Label Text="1989 - 1999" TextColor="#BEBEBE" FontFamily="Segoe UI" />
+                </StackLayout>
+
+
+                <!--Episodios-->
+                <Label Text="Episodios" TextColor="White"
                    FontSize="Title" FontFamily="Segoe UI"
                    FontAttributes="Bold" Margin="20,15,0,10"/>
 
-
-                <CollectionView ItemsSource="{Binding Temporadas}" Margin="15,0">
+                <CollectionView ItemsSource="{Binding Capitulos}" Margin="15,0">
 
                     <CollectionView.ItemsLayout>
-                        <!--<GridItemsLayout Orientation="Vertical" Span="3" HorizontalItemSpacing="10" VerticalItemSpacing="14"/>-->
-                        <GridItemsLayout Orientation="Vertical" Span="3" />
+                        <GridItemsLayout Orientation="Vertical" Span="3"/>
                     </CollectionView.ItemsLayout>
 
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Grid Padding="5,8">
-                                <pancake:PancakeView CornerRadius="10" HeightRequest="150">
-                                    <pancake:PancakeView.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding Source={x:Reference ventana}, Path=BindingContext.VerTemporadaCommand}" CommandParameter="{Binding .}"/>
-                                    </pancake:PancakeView.GestureRecognizers>
+                                <pancake:PancakeView CornerRadius="10" HeightRequest="160" >
                                     <Grid>
-                                        <Image Source="{Binding Numero, Converter={StaticResource Key=numeroToImageConverter}}" Aspect="Fill"/>
+                                        <Image Source="{Binding Imagen}" Aspect="AspectFill"/>
                                         <g:GradientView Margin="0">
                                             <g:GradientView.GradientSource>
                                                 <g:LinearGradient>
@@ -64,11 +82,11 @@
                                         </g:GradientView>
                                         <FlexLayout Direction="Column" JustifyContent="End" Margin="7,10">
                                             <StackLayout Spacing="1">
-                                                <Label Text="{Binding Numero, StringFormat='T{0}'}"
-                                               TextColor="White" FontSize="Subtitle" FontAttributes="Bold" FontFamily="Segoe UI"/>
+                                                <Label Text="{Binding Titulo, Converter={StaticResource Key=tituloConverter}}"
+                                               TextColor="White" FontSize="Small" FontAttributes="Bold" FontFamily="Segoe UI"/>
 
                                                 <StackLayout Orientation="Horizontal">
-                                                    <Label Text="{Binding TotalEpisodios, StringFormat='{0} Capitulos'}"
+                                                    <Label Text="{Binding Minutos, StringFormat='{0} minutos'}"
                                                    TextColor="White" FontSize="11"/>
                                                 </StackLayout>
                                             </StackLayout>
@@ -79,6 +97,7 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
+
             </StackLayout>
             <Frame CornerRadius="50" BackgroundColor="Transparent" HorizontalOptions="Start" VerticalOptions="Start" Margin="0,10,0,0">
                 <Frame.GestureRecognizers>
@@ -88,4 +107,5 @@
             </Frame>
         </Grid>
     </ScrollView>
+
 </controls:AnimationPage>
