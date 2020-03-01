@@ -115,11 +115,11 @@
                                 </g:GradientView>
                                 <FlexLayout Direction="Column" JustifyContent="End" Margin="10,10">
                                     <StackLayout Spacing="1">
-                                        <Label Text="{Binding Titulo}"
+                                        <Label Text="{Binding Nombre}"
                                                TextColor="White" FontSize="Subtitle" FontAttributes="Bold" FontFamily="Segoe UI"/>
 
                                         <StackLayout Orientation="Horizontal">
-                                            <Label Text="{Binding Minutos, StringFormat='{0} minutos'}"
+                                            <Label Text="{Binding Duracion, StringFormat='{0} minutos'}"
                                                    TextColor="White" FontSize="11"/>
                                         </StackLayout>
                                     </StackLayout>

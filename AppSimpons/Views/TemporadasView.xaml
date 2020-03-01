@@ -5,7 +5,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              xmlns:controls="clr-namespace:FormsControls.Base;assembly=FormsControls.Base"
-             xmlns:v="clr-namespace:AppSimpons.ViewModels"
              xmlns:g="clr-namespace:MagicGradients;assembly=MagicGradients"
              xmlns:helpers="clr-namespace:AppSimpons.Helpers"
              xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
@@ -18,10 +17,6 @@
     <controls:AnimationPage.Resources>
         <helpers:uriToImageConverter x:Key="numeroToImageConverter"/>
     </controls:AnimationPage.Resources>
-
-    <controls:AnimationPage.BindingContext>
-        <v:InicioViewModel/>
-    </controls:AnimationPage.BindingContext>
 
     <ScrollView>
         <Grid>

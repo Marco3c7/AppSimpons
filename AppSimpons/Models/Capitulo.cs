@@ -1,26 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace AppSimpons.Models
 {
-    public class Capitulo : INotifyPropertyChanged
+    public class Capitulo
     {
-        private string imagen;
-        private int minutos;
-        private string titulo;
-
-        public string Titulo { get => titulo; set { titulo = value; Actualizar(); } }
-        public int Minutos { get => minutos; set { minutos = value; Actualizar(); } }
-        public string Imagen { get => imagen; set { imagen = value; Actualizar(); } }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        void Actualizar([CallerMemberName] string name = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
+        public int Id { get; set; }
+        public string Imagen { get; set; }
+        public string Nombre { get; set; }
+        public string NombreOriginal { get; set; }
+        public DateTime FechaEmision { get; set; }
+        public int Duracion { get; set; }
+        public string Sinopsis { get; set; }
+        public int Temporada { get; set; }
+        public int Episodio { get; set; }
     }
 }
