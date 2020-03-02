@@ -17,6 +17,7 @@
     <controls:AnimationPage.Resources>
         <ResourceDictionary>
             <helpers:tituloToShortTitulo x:Key="tituloConverter"/>
+            <helpers:temporadaFullConverter x:Key="fullconverter"></helpers:temporadaFullConverter>
         </ResourceDictionary>
     </controls:AnimationPage.Resources>
 
@@ -26,7 +27,7 @@
             <StackLayout>
 
                 <Grid>
-                    <Image Source="temporada1full.png" HorizontalOptions="FillAndExpand"/>
+                    <Image Source="{Binding TemporadaEpisodios.Temporada.Numero, Converter={StaticResource Key=fullconverter}}" HorizontalOptions="FillAndExpand"/>
                     <g:GradientView>
                         <g:GradientView.GradientSource>
                             <g:LinearGradient>
