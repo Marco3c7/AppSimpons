@@ -3,12 +3,13 @@ using AppSimpons.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Text;
 using Xamarin.Forms;
 
 namespace AppSimpons.ViewModels
 {
-    public class InicioViewModel
+    public class InicioViewModel: INotifyPropertyChanged
     {
         public ObservableCollection<Temporada> Temporadas { get; set; } = new ObservableCollection<Temporada>();
         public ObservableCollection<Episodio> Episodios { get; set; } = new ObservableCollection<Episodio>();
@@ -21,6 +22,16 @@ namespace AppSimpons.ViewModels
         public Command<Episodio> VerEpisodioCommand { get; set; }
         public Command<Temporada> VerTemporadaCommand { get; set; }
         public Command CancelarCommand { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private bool loading;
+
+        public bool Loading
+        {
+            get { return loading; }
+            set { loading = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Loading")); }
+        }
+
 
         public InicioViewModel()
         {
@@ -69,11 +80,12 @@ namespace AppSimpons.ViewModels
 
             if (App.Current.MainPage.Navigation.NavigationStack[App.Current.MainPage.Navigation.NavigationStack.Count - 1].GetType() != temporadaView.GetType())
             {
+                Loading = true;
                 await App.TheSimpson.DescargarEpisodiosDeTemporada(temporada.Numero);
-
                 TemporadaEpisodios.Temporada = temporada;
                 TemporadaEpisodios.Episodios = App.TheSimpson.GetEpisodiosByNumeroTemporada(temporada.Numero);
                 temporadaView.BindingContext = this;
+                Loading = false;
                 await App.Current.MainPage.Navigation.PushAsync(temporadaView);
             }
         }

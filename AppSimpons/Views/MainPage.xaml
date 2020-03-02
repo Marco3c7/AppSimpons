@@ -20,41 +20,42 @@
         <helpers:tituloToShortTitulo x:Key="tituloToShortTituloConverter"/>
     </ContentPage.Resources>
 
-    <ScrollView>
-        <StackLayout>
-            <Image Source="wallpaper.png" HorizontalOptions="FillAndExpand" x:Name="wallpaper"/>
-            <Image Source="logo.png" HeightRequest="90" Margin="0,-55,0,0" HorizontalOptions="Center"/>
+    <Grid>
+        <ScrollView>
+            <StackLayout>
+                <Image Source="wallpaper.png" HorizontalOptions="FillAndExpand" x:Name="wallpaper"/>
+                <Image Source="logo.png" HeightRequest="90" Margin="0,-55,0,0" HorizontalOptions="Center"/>
 
-            <!--Temporadas-->
-            <FlexLayout Direction="Row" JustifyContent="SpaceBetween" Margin="20,10,0,0" AlignItems="Center">
-                <Label Text="Temporadas" TextColor="White"
+                <!--Temporadas-->
+                <FlexLayout Direction="Row" JustifyContent="SpaceBetween" Margin="20,10,0,0" AlignItems="Center">
+                    <Label Text="Temporadas" TextColor="White"
                    FontSize="Title" FontFamily="Segoe UI"
                    FontAttributes="Bold"/>
 
-                <Frame CornerRadius="50" BackgroundColor="Transparent">
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding VerTemporadasCommand}"/>
-                    </Frame.GestureRecognizers>
-                    <Image Source="go.png" HeightRequest="22" />
-                </Frame>
-            </FlexLayout>
+                    <Frame CornerRadius="50" BackgroundColor="Transparent">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding VerTemporadasCommand}"/>
+                        </Frame.GestureRecognizers>
+                        <Image Source="go.png" HeightRequest="22" />
+                    </Frame>
+                </FlexLayout>
 
-            <CollectionView ItemsSource="{Binding Temporadas}" HeightRequest="240" Margin="20,0,0,0">
+                <CollectionView ItemsSource="{Binding Temporadas}" HeightRequest="240" Margin="20,0,0,0">
 
-                <CollectionView.ItemsLayout>
-                    <GridItemsLayout Orientation="Horizontal" Span="1" HorizontalItemSpacing="14"/>
-                </CollectionView.ItemsLayout>
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Horizontal" Span="1" HorizontalItemSpacing="14"/>
+                    </CollectionView.ItemsLayout>
 
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <pancake:PancakeView CornerRadius="10" WidthRequest="150">
-                            <pancake:PancakeView.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding Source={x:Reference ventana}, Path=BindingContext.VerTemporadaCommand}" CommandParameter="{Binding .}"/>
-                            </pancake:PancakeView.GestureRecognizers>
-                            <Grid>
-                                <Image Source="{Binding Numero, Converter={StaticResource Key=numeroToImageConverter}}" Aspect="Fill"/>
-                                <Image Source="gradientCard.png" Aspect="Fill"/>
-                                <!--<g:GradientView Margin="0">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <pancake:PancakeView CornerRadius="10" WidthRequest="150">
+                                <pancake:PancakeView.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={x:Reference ventana}, Path=BindingContext.VerTemporadaCommand}" CommandParameter="{Binding .}"/>
+                                </pancake:PancakeView.GestureRecognizers>
+                                <Grid>
+                                    <Image Source="{Binding Numero, Converter={StaticResource Key=numeroToImageConverter}}" Aspect="Fill"/>
+                                    <Image Source="gradientCard.png" Aspect="Fill"/>
+                                    <!--<g:GradientView Margin="0">
                                     <g:GradientView.GradientSource>
                                         <g:LinearGradient>
                                             <g:GradientStop Color="Transparent" Offset="0" />
@@ -63,56 +64,56 @@
                                         </g:LinearGradient>
                                     </g:GradientView.GradientSource>
                                 </g:GradientView>-->
-                                <FlexLayout Direction="Column" JustifyContent="End" Margin="10,10">
-                                    <StackLayout Spacing="1">
-                                        <Label Text="{Binding Numero, StringFormat='Temporada {0}'}"
+                                    <FlexLayout Direction="Column" JustifyContent="End" Margin="10,10">
+                                        <StackLayout Spacing="1">
+                                            <Label Text="{Binding Numero, StringFormat='Temporada {0}'}"
                                                TextColor="White" FontSize="Subtitle" FontAttributes="Bold" FontFamily="Segoe UI"/>
 
-                                        <StackLayout Orientation="Horizontal">
-                                            <Label Text="{Binding TotalEpisodios, StringFormat='{0} Capitulos'}"
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label Text="{Binding TotalEpisodios, StringFormat='{0} Capitulos'}"
                                                    TextColor="White" FontSize="11"/>
 
+                                            </StackLayout>
                                         </StackLayout>
-                                    </StackLayout>
-                                </FlexLayout>
-                            </Grid>
-                        </pancake:PancakeView>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                                    </FlexLayout>
+                                </Grid>
+                            </pancake:PancakeView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
 
-            <!--Episodios-->
-            <FlexLayout Direction="Row" JustifyContent="SpaceBetween" Margin="30,15,0,0" AlignItems="Center">
-                <Label Text="Episodios Nuevos" TextColor="White"
+                <!--Episodios-->
+                <FlexLayout Direction="Row" JustifyContent="SpaceBetween" Margin="30,15,0,0" AlignItems="Center">
+                    <Label Text="Episodios Nuevos" TextColor="White"
                    FontSize="Title" FontFamily="Segoe UI"
                    FontAttributes="Bold"/>
 
-                <Frame CornerRadius="50" BackgroundColor="Transparent" >
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding VerEpisodiosCommand}"/>
-                    </Frame.GestureRecognizers>
-                    <Image Source="go.png" HeightRequest="22" />
-                </Frame>
-            </FlexLayout>
+                    <Frame CornerRadius="50" BackgroundColor="Transparent" >
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding VerEpisodiosCommand}"/>
+                        </Frame.GestureRecognizers>
+                        <Image Source="go.png" HeightRequest="22" />
+                    </Frame>
+                </FlexLayout>
 
-            <CollectionView ItemsSource="{Binding Episodios}" HeightRequest="240" Margin="20,0,0,20">
+                <CollectionView ItemsSource="{Binding Episodios}" HeightRequest="240" Margin="20,0,0,20">
 
-                <CollectionView.ItemsLayout>
-                    <GridItemsLayout Orientation="Horizontal" Span="1" HorizontalItemSpacing="14"/>
-                </CollectionView.ItemsLayout>
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Horizontal" Span="1" HorizontalItemSpacing="14"/>
+                    </CollectionView.ItemsLayout>
 
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
 
-                        <pancake:PancakeView CornerRadius="10" WidthRequest="150">
-                            <pancake:PancakeView.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding Source={x:Reference ventana}, Path=BindingContext.VerEpisodioCommand}" CommandParameter="{Binding .}"/>
-                            </pancake:PancakeView.GestureRecognizers>
-                            <Grid>
-                                <Image Source="{Binding Imagen}" Aspect="AspectFill"/>
-                                <Image Source="gradientCard.png" Aspect="Fill"/>
+                            <pancake:PancakeView CornerRadius="10" WidthRequest="150">
+                                <pancake:PancakeView.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={x:Reference ventana}, Path=BindingContext.VerEpisodioCommand}" CommandParameter="{Binding .}"/>
+                                </pancake:PancakeView.GestureRecognizers>
+                                <Grid>
+                                    <Image Source="{Binding Imagen}" Aspect="AspectFill"/>
+                                    <Image Source="gradientCard.png" Aspect="Fill"/>
 
-                                <!--<g:GradientView Margin="0">
+                                    <!--<g:GradientView Margin="0">
                                     <g:GradientView.GradientSource>
                                         <g:LinearGradient>
                                             <g:GradientStop Color="Transparent" Offset="0" />
@@ -121,23 +122,27 @@
                                         </g:LinearGradient>
                                     </g:GradientView.GradientSource>
                                 </g:GradientView>-->
-                                <FlexLayout Direction="Column" JustifyContent="End" Margin="10,10">
-                                    <StackLayout Spacing="1">
-                                        <Label Text="{Binding Nombre, Converter={StaticResource tituloToShortTituloConverter}}"
+                                    <FlexLayout Direction="Column" JustifyContent="End" Margin="10,10">
+                                        <StackLayout Spacing="1">
+                                            <Label Text="{Binding Nombre, Converter={StaticResource tituloToShortTituloConverter}}"
                                                TextColor="White" FontSize="Subtitle" FontAttributes="Bold" FontFamily="Segoe UI"/>
 
-                                        <StackLayout Orientation="Horizontal">
-                                            <Label Text="{Binding Duracion, StringFormat='{0} minutos'}"
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label Text="{Binding Duracion, StringFormat='{0} minutos'}"
                                                    TextColor="White" FontSize="11"/>
+                                            </StackLayout>
                                         </StackLayout>
-                                    </StackLayout>
-                                </FlexLayout>
-                            </Grid>
-                        </pancake:PancakeView>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </StackLayout>
-    </ScrollView>
+                                    </FlexLayout>
+                                </Grid>
+                            </pancake:PancakeView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+        </ScrollView>
+        <ContentView BackgroundColor="#c0000000" IsVisible="{Binding Loading}">
+            <ActivityIndicator IsRunning="{Binding Loading}" VerticalOptions="Center" HorizontalOptions="Center"></ActivityIndicator>
+        </ContentView>
+    </Grid>
 
 </ContentPage>
