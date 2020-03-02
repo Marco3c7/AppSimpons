@@ -33,7 +33,7 @@
                    FontAttributes="Bold" Margin="20,15,0,10"/>
 
 
-                <CollectionView ItemsSource="{Binding Capitulos}" Margin="15,0">
+                <CollectionView ItemsSource="{Binding Episodios}" Margin="15,0">
 
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout Orientation="Vertical" Span="3" />
