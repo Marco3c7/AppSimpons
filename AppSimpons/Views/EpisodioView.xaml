@@ -6,17 +6,22 @@
              xmlns:controls="clr-namespace:FormsControls.Base;assembly=FormsControls.Base"
              xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"           
              mc:Ignorable="d"
+             xmlns:helpers="clr-namespace:AppSimpons.Helpers"
              x:Class="AppSimpons.Views.EpisodioView" x:Name="ventana" NavigationPage.HasNavigationBar="False" BackgroundColor="#1E1E1E">
 
     <controls:AnimationPage.PageAnimation>
         <controls:FadePageAnimation Duration="Short"/>
     </controls:AnimationPage.PageAnimation>
+    <controls:AnimationPage.Resources>
+        <helpers:temporadaFullConverter x:Key="fullconverter"></helpers:temporadaFullConverter>
 
-    <ScrollView>
+    </controls:AnimationPage.Resources>
+<ScrollView>
         <Grid>
             <StackLayout>
                 <Grid BackgroundColor="#3E3E3E">
-                    <Image Source="temporada1full.png" HorizontalOptions="FillAndExpand" Opacity="0.2"/>
+                    <!--<Image Source="temporada1full.png" HorizontalOptions="FillAndExpand" Opacity="0.2"/>-->
+                    <Image Source="{Binding Episodio.NumeroTemporada, Converter={StaticResource Key=fullconverter}}" Opacity="0.2" Aspect="AspectFill" HorizontalOptions="FillAndExpand"/>
                     <Image Source="gradient.png" HorizontalOptions="FillAndExpand" VerticalOptions="Fill" Aspect="Fill"/>
                 </Grid>
 

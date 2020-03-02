@@ -172,7 +172,7 @@ namespace AppSimpons.ViewModels
         {
             if (!string.IsNullOrWhiteSpace(dato))
             {
-                return connection.Table<Episodio>().Where(x => x.Nombre.ToUpper().Contains(dato.ToUpper()) || x.NombreOriginal.ToUpper().Contains(dato.ToUpper()) || x.Sinopsis.ToUpper().Contains(dato.ToUpper())).ToList();
+                return connection.Table<Episodio>().Where(x => x.Nombre.ToUpper().Contains(dato.ToUpper())).ToList();
             }
             else
             {

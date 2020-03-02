@@ -130,7 +130,9 @@
     <AndroidResource Include="Resources\drawable\episodios.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\drawable\gradient.png" />
+    <AndroidResource Include="Resources\drawable\gradient.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AndroidResource>
     <AndroidResource Include="Resources\drawable\gradientCard.png" />
     <AndroidResource Include="Resources\drawable\splash.xml" />
     <AndroidResource Include="Resources\mipmap-hdpi\donut.png" />

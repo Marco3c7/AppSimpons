@@ -16,14 +16,22 @@ namespace AppSimpons
 
         public async void Cargar()
         {
-            await TheSimpson.DescargarTemporadas();
-            await TheSimpson.DescargarEpisodiosDeTemporada(30);
-
+            try
+            {
+                await TheSimpson.DescargarTemporadas();
+                await TheSimpson.DescargarEpisodiosDeTemporada(30);
             Device.SetFlags(new string[]
             {
                 "CarouselView_Experimental"
             });
-            MainPage = new NavigationPage(new MainPage());
+                MainPage = new NavigationPage(new MainPage());
+            }
+            catch (Exception ex)
+            {
+                MainPage = new NavigationPage(new MainPage());
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "Ok");
+            }
+
         }
 
         protected override void OnStart()

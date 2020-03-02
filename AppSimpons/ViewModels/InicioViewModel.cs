@@ -82,18 +82,26 @@ namespace AppSimpons.ViewModels
         TemporadaView temporadaView;
         private async void VerTemporada(Temporada temporada)
         {
-            if (temporadaView == null)
-                temporadaView = new TemporadaView();
-
-            if (App.Current.MainPage.Navigation.NavigationStack[App.Current.MainPage.Navigation.NavigationStack.Count - 1].GetType() != temporadaView.GetType())
+            try
             {
-                Loading = true;
-                await App.TheSimpson.DescargarEpisodiosDeTemporada(temporada.Numero);
-                TemporadaEpisodios.Temporada = temporada;
-                TemporadaEpisodios.Episodios = App.TheSimpson.GetEpisodiosByNumeroTemporada(temporada.Numero);
-                temporadaView.BindingContext = this;
+                if (temporadaView == null)
+                    temporadaView = new TemporadaView();
+
+                if (App.Current.MainPage.Navigation.NavigationStack[App.Current.MainPage.Navigation.NavigationStack.Count - 1].GetType() != temporadaView.GetType())
+                {
+                    Loading = true;
+                    await App.TheSimpson.DescargarEpisodiosDeTemporada(temporada.Numero);
+                    TemporadaEpisodios.Temporada = temporada;
+                    TemporadaEpisodios.Episodios = App.TheSimpson.GetEpisodiosByNumeroTemporada(temporada.Numero);
+                    temporadaView.BindingContext = this;
+                    Loading = false;
+                    await App.Current.MainPage.Navigation.PushAsync(temporadaView);
+                }
+            }
+            catch (Exception ex)
+            {
                 Loading = false;
-                await App.Current.MainPage.Navigation.PushAsync(temporadaView);
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "Ok");
             }
         }
 

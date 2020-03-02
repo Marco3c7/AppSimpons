@@ -27,8 +27,10 @@
             <StackLayout>
 
                 <Grid>
-                    <Image Source="{Binding TemporadaEpisodios.Temporada.Numero, Converter={StaticResource Key=fullconverter}}" HorizontalOptions="FillAndExpand"/>
-                    <g:GradientView>
+                    <Image Source="{Binding TemporadaEpisodios.Temporada.Numero, Converter={StaticResource Key=fullconverter}}" Aspect="AspectFill" HorizontalOptions="FillAndExpand"/>
+                    <Image Source="gradient.png" Aspect="Fill" HorizontalOptions="FillAndExpand"/>
+
+                    <!--<g:GradientView>
                         <g:GradientView.GradientSource>
                             <g:LinearGradient>
                                 <g:GradientStop Color="#1E1E1E" Offset="0"/>
@@ -37,7 +39,7 @@
                                 <g:GradientStop Color="#1E1E1E" Offset="1" />
                             </g:LinearGradient>
                         </g:GradientView.GradientSource>
-                    </g:GradientView>
+                    </g:GradientView>-->
                 </Grid>
 
                 <Label Text="{Binding TemporadaEpisodios.Temporada.Numero, StringFormat='Los Simpson: Temporada {0}'}" TextColor="White"

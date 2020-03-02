@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FormsControls.Base;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,7 @@ using Xamarin.Forms.Xaml;
 namespace AppSimpons.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class FiltrarView : ContentPage
+    public partial class FiltrarView : AnimationPage
     {
         public FiltrarView()
         {

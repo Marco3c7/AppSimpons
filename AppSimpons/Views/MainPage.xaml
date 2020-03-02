@@ -14,12 +14,10 @@
     <ContentPage.BindingContext>
         <v:InicioViewModel/>
     </ContentPage.BindingContext>
-
     <ContentPage.Resources>
         <helpers:uriToImageConverter x:Key="numeroToImageConverter"/>
         <helpers:tituloToShortTitulo x:Key="tituloToShortTituloConverter"/>
     </ContentPage.Resources>
-
     <Grid>
         <ScrollView>
             <StackLayout>
@@ -30,7 +28,7 @@
                         <Frame.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding AbrirBuscadorCommand}"/>
                         </Frame.GestureRecognizers>
-                        <Image Source="search.png" HeightRequest="25" VerticalOptions="Center"/>
+                        <Image Source="search.png" HeightRequest="20" VerticalOptions="Center"/>
                     </Frame>
                 </Grid>
                 <Image Source="logo.png" HeightRequest="90" Margin="0,-55,0,0" HorizontalOptions="Center"/>

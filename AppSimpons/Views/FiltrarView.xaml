@@ -1,17 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<controls:AnimationPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             xmlns:controls="clr-namespace:FormsControls.Base;assembly=FormsControls.Base"
              xmlns:g="clr-namespace:MagicGradients;assembly=MagicGradients"
              xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              xmlns:helpers="clr-namespace:AppSimpons.Helpers"
              x:Name="ventana"
              x:Class="AppSimpons.Views.FiltrarView" BackgroundColor="#1E1E1E" NavigationPage.HasNavigationBar="False" Disappearing="ventana_Disappearing">
-    <ContentPage.Resources>
+
+    <controls:AnimationPage.PageAnimation>
+        <controls:FadePageAnimation Duration="Short"/>
+    </controls:AnimationPage.PageAnimation>
+    
+    
+    <controls:AnimationPage.Resources>
         <helpers:tituloToShortTitulo x:Key="tituloToShortTituloConverter"/>
-    </ContentPage.Resources>
+    </controls:AnimationPage.Resources>
     <StackLayout>
         <Grid>
             <Frame CornerRadius="50" HeightRequest="50" BackgroundColor="Transparent" HorizontalOptions="Start" VerticalOptions="Start" Margin="0,-5,0,0">
@@ -23,11 +30,15 @@
 
             <Frame CornerRadius="10" HeightRequest="50" BackgroundColor="Transparent" HorizontalOptions="End" VerticalOptions="Start" Margin="0,-5,0,0">
                 <StackLayout VerticalOptions="Center" Orientation="Horizontal">
-                    <Frame CornerRadius="25" HeightRequest="35" IsClippedToBounds="True" Padding="0,0">
+                    <Frame CornerRadius="25" HeightRequest="35" IsClippedToBounds="True" Padding="0,0" Margin="0,0,10,0">
                         <Entry WidthRequest="250" TextColor="Black" Placeholder="Busca el nombre del episodio" PlaceholderColor="Black" FontFamily="Segoe UI"
                                            BackgroundColor="White" FontSize="15" Margin="8,0,0,-9" VerticalTextAlignment="Start" x:Name="txtBuscar" TextChanged="txtBuscar_TextChanged" ReturnCommand="{Binding FiltrarCommand}" ReturnCommandParameter="{Binding Text, Source={x:Reference txtBuscar}}"/>
                     </Frame>
-                    <Image Source="search.png" HeightRequest="20" />
+                    <Image Source="search.png" HeightRequest="20">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding FiltrarCommand}" CommandParameter="{Binding Text, Source={x:Reference txtBuscar}}"></TapGestureRecognizer>
+                        </Image.GestureRecognizers>
+                    </Image>
                 </StackLayout>
             </Frame>
         </Grid>
@@ -79,4 +90,4 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
     </StackLayout>
-</ContentPage>
+</controls:AnimationPage>
