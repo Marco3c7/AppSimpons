@@ -1,4 +1,4 @@
-﻿using AppSimpons.Models;
+﻿using AppSimpons.ViewModels;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;

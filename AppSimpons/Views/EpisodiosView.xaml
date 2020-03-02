@@ -44,7 +44,7 @@
                             <Grid Padding="5,8">
                                 <pancake:PancakeView CornerRadius="10" HeightRequest="150">
                                     <pancake:PancakeView.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding Source={x:Reference ventana}, Path=BindingContext.VerTemporadaCommand}" CommandParameter="{Binding .}"/>
+                                        <TapGestureRecognizer Command="{Binding Source={x:Reference ventana}, Path=BindingContext.VerEpisodioCommand}" CommandParameter="{Binding .}"/>
                                     </pancake:PancakeView.GestureRecognizers>
                                     <Grid>
                                         <Image Source="{Binding Imagen}" Aspect="Fill"/>

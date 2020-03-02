@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:g="clr-namespace:MagicGradients;assembly=MagicGradients"
+             xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:helpers="clr-namespace:AppSimpons.Helpers"
+             x:Name="ventana"
+             x:Class="AppSimpons.Views.FiltrarView" BackgroundColor="#1E1E1E" NavigationPage.HasNavigationBar="False" Disappearing="ventana_Disappearing">
+    <ContentPage.Resources>
+        <helpers:tituloToShortTitulo x:Key="tituloToShortTituloConverter"/>
+    </ContentPage.Resources>
+    <StackLayout>
+        <Grid>
+            <Frame CornerRadius="50" HeightRequest="50" BackgroundColor="Transparent" HorizontalOptions="Start" VerticalOptions="Start" Margin="0,-5,0,0">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding CancelarCommand}"></TapGestureRecognizer>
+                </Frame.GestureRecognizers>
+                <Image Source="back.png" HeightRequest="25" VerticalOptions="Center"/>
+            </Frame>
+
+            <Frame CornerRadius="10" HeightRequest="50" BackgroundColor="Transparent" HorizontalOptions="End" VerticalOptions="Start" Margin="0,-5,0,0">
+                <StackLayout VerticalOptions="Center" Orientation="Horizontal">
+                    <Frame CornerRadius="25" HeightRequest="35" IsClippedToBounds="True" Padding="0,0">
+                        <Entry WidthRequest="250" TextColor="Black" Placeholder="Busca el nombre del episodio" PlaceholderColor="Black" FontFamily="Segoe UI"
+                                           BackgroundColor="White" FontSize="15" Margin="8,0,0,-9" VerticalTextAlignment="Start" x:Name="txtBuscar" TextChanged="txtBuscar_TextChanged" ReturnCommand="{Binding FiltrarCommand}" ReturnCommandParameter="{Binding Text, Source={x:Reference txtBuscar}}"/>
+                    </Frame>
+                    <Image Source="search.png" HeightRequest="20" />
+                </StackLayout>
+            </Frame>
+        </Grid>
+
+        <Label Text="Resultados de la busqúeda:" TextColor="White" Margin="20,0,20,15"
+                   FontSize="Title" FontFamily="Segoe UI"
+                   FontAttributes="Bold"/>
+
+        <CollectionView ItemsSource="{Binding EpisodiosFiltrados}" Margin="15,0">
+
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" Span="3" />
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="5,8">
+                        <pancake:PancakeView CornerRadius="10" HeightRequest="150">
+                            <pancake:PancakeView.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={x:Reference ventana}, Path=BindingContext.VerEpisodioCommand}" CommandParameter="{Binding .}"/>
+                            </pancake:PancakeView.GestureRecognizers>
+                            <Grid>
+                                <Image Source="{Binding Imagen}" Aspect="Fill"/>
+                                <Image Source="gradientCard.png" Aspect="Fill"/>
+                                <!--<g:GradientView Margin="0">
+                                            <g:GradientView.GradientSource>
+                                                <g:LinearGradient>
+                                                    <g:GradientStop Color="Transparent" Offset="0" />
+                                                    <g:GradientStop Color="Transparent" Offset="0.5" />
+                                                    <g:GradientStop Color="#242424" Offset="1" />
+                                                </g:LinearGradient>
+                                            </g:GradientView.GradientSource>
+                                        </g:GradientView>-->
+                                <FlexLayout Direction="Column" JustifyContent="End" Margin="7,10">
+                                    <StackLayout Spacing="1">
+                                        <Label Text="{Binding Nombre, Converter={StaticResource Key=tituloToShortTituloConverter}}"
+                                               TextColor="White" FontSize="Small" FontAttributes="Bold" FontFamily="Segoe UI"/>
+
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="{Binding Duracion, StringFormat='{0} minutos'}"
+                                                   TextColor="White" FontSize="11"/>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </FlexLayout>
+                            </Grid>
+                        </pancake:PancakeView>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+</ContentPage>

@@ -13,6 +13,7 @@ namespace AppSimpons.ViewModels
     {
         public ObservableCollection<Temporada> Temporadas { get; set; } = new ObservableCollection<Temporada>();
         public ObservableCollection<Episodio> Episodios { get; set; } = new ObservableCollection<Episodio>();
+        public ObservableCollection<Episodio> EpisodiosFiltrados { get; set; } = new ObservableCollection<Episodio>();
 
         public TemporadaEpisodios TemporadaEpisodios { get; set; } = new TemporadaEpisodios();
         public Episodio Episodio { get; set; } = new Episodio();
@@ -21,9 +22,13 @@ namespace AppSimpons.ViewModels
         public Command VerEpisodiosCommand { get; set; }
         public Command<Episodio> VerEpisodioCommand { get; set; }
         public Command<Temporada> VerTemporadaCommand { get; set; }
+        public Command AbrirBuscadorCommand { get; set; }
         public Command CancelarCommand { get; set; }
+        public Command<string> FiltrarCommand { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+
         private bool loading;
 
         public bool Loading
@@ -40,6 +45,8 @@ namespace AppSimpons.ViewModels
             VerTemporadasCommand = new Command(VerTemporadas);
             VerTemporadaCommand = new Command<Temporada>(VerTemporada);
             CancelarCommand = new Command(Cancelar);
+            AbrirBuscadorCommand = new Command(AbrirBuscador);
+            FiltrarCommand = new Command<string>(FiltrarEpisodios);
             Temporadas = App.TheSimpson.GetTemporadas();
             Episodios = App.TheSimpson.GetUltimosEpisodios();
         }
@@ -93,6 +100,7 @@ namespace AppSimpons.ViewModels
         private async void Cancelar()
         {
             await App.Current.MainPage.Navigation.PopAsync();
+            EpisodiosFiltrados.Clear();
         }
 
         TemporadasView temporadasView;
@@ -105,6 +113,26 @@ namespace AppSimpons.ViewModels
             {
                 temporadasView.BindingContext = this;
                 App.Current.MainPage.Navigation.PushAsync(temporadasView);
+            }
+        }
+
+        FiltrarView filtrarView;
+        private void AbrirBuscador()
+        {
+            if (filtrarView == null)
+                filtrarView = new FiltrarView();
+
+            filtrarView.BindingContext = this;
+            App.Current.MainPage.Navigation.PushAsync(filtrarView);
+        }
+
+        private void FiltrarEpisodios(string dato)
+        {
+            EpisodiosFiltrados.Clear();
+            if (!string.IsNullOrWhiteSpace(dato))
+            {
+                var lista = App.TheSimpson.FiltrarEpisodios(dato);
+                lista.ForEach(x => EpisodiosFiltrados.Add(x));
             }
         }
     }

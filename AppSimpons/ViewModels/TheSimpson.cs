@@ -8,7 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using System.Linq;
-namespace AppSimpons.Models
+using AppSimpons.Models;
+
+namespace AppSimpons.ViewModels
 {
     public class TheSimpson
     {
@@ -162,6 +164,19 @@ namespace AppSimpons.Models
                         throw new Exception(await resultado.Content.ReadAsStringAsync());
                     }
                 }
+            }
+        }
+
+
+        public List<Episodio> FiltrarEpisodios(string dato)
+        {
+            if (!string.IsNullOrWhiteSpace(dato))
+            {
+                return connection.Table<Episodio>().Where(x => x.Nombre.ToUpper().Contains(dato.ToUpper()) || x.NombreOriginal.ToUpper().Contains(dato.ToUpper()) || x.Sinopsis.ToUpper().Contains(dato.ToUpper())).ToList();
+            }
+            else
+            {
+                return null;
             }
         }
 

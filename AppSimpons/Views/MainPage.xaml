@@ -23,7 +23,16 @@
     <Grid>
         <ScrollView>
             <StackLayout>
-                <Image Source="wallpaper.png" HorizontalOptions="FillAndExpand" x:Name="wallpaper"/>
+                <!--<Image Source="wallpaper.png" HorizontalOptions="FillAndExpand" x:Name="wallpaper"/>-->
+                <Grid>
+                    <Image Source="wallpaper.png" HorizontalOptions="FillAndExpand" x:Name="wallpaper"/>
+                    <Frame CornerRadius="50" HeightRequest="50" BackgroundColor="Transparent" HorizontalOptions="End" VerticalOptions="Start" Margin="0,-5,0,0">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding AbrirBuscadorCommand}"/>
+                        </Frame.GestureRecognizers>
+                        <Image Source="search.png" HeightRequest="25" VerticalOptions="Center"/>
+                    </Frame>
+                </Grid>
                 <Image Source="logo.png" HeightRequest="90" Margin="0,-55,0,0" HorizontalOptions="Center"/>
 
                 <!--Temporadas-->
