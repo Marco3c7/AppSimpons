@@ -34,7 +34,6 @@ namespace AppSimpons.Models
                     if (res.IsSuccessStatusCode)
                     {
                         List<Temporada> listaTemporadas = JsonConvert.DeserializeObject<List<Temporada>>(await res.Content.ReadAsStringAsync());
-
                         foreach (Temporada temporada in listaTemporadas)
                         {
                             Temporada t = new Temporada()
