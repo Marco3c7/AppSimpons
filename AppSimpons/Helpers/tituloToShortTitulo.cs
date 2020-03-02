@@ -6,7 +6,7 @@ using Xamarin.Forms;
 
 namespace AppSimpons.Helpers
 {
-    public class tituloToTituloCortoConverter : IValueConverter
+    public class tituloToShortTitulo : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

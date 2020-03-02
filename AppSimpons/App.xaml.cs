@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AppSimpons.Models;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -6,7 +7,7 @@ namespace AppSimpons
 {
     public partial class App : Application
     {
-        public static AppSimpons.Models.TheSimpson TheSimpson { get; set; } = new AppSimpons.Models.TheSimpson();
+        public static TheSimpson TheSimpson { get; set; } = new TheSimpson();
         public App()
         {
             InitializeComponent();
@@ -16,6 +17,8 @@ namespace AppSimpons
         public async void Cargar()
         {
             await TheSimpson.DescargarTemporadas();
+            await TheSimpson.DescargarEpisodiosDeTemporada(30);
+
             Device.SetFlags(new string[]
             {
                 "CarouselView_Experimental"

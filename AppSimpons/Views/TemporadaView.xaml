@@ -7,7 +7,6 @@
              xmlns:controls="clr-namespace:FormsControls.Base;assembly=FormsControls.Base"
              xmlns:g="clr-namespace:MagicGradients;assembly=MagicGradients"
              xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
-             xmlns:v="clr-namespace:AppSimpons.ViewModels" 
              xmlns:helpers="clr-namespace:AppSimpons.Helpers"
              x:Class="AppSimpons.Views.TemporadaView" BackgroundColor="#1E1E1E" x:Name="ventana" NavigationPage.HasNavigationBar="False">
 
@@ -15,13 +14,9 @@
         <controls:FadePageAnimation Duration="Short"/>
     </controls:AnimationPage.PageAnimation>
 
-    <controls:AnimationPage.BindingContext>
-        <v:InicioViewModel/>
-    </controls:AnimationPage.BindingContext>
-
     <controls:AnimationPage.Resources>
         <ResourceDictionary>
-            <helpers:tituloToTituloCortoConverter x:Key="tituloConverter"/>
+            <helpers:tituloToShortTitulo x:Key="tituloConverter"/>
         </ResourceDictionary>
     </controls:AnimationPage.Resources>
 
@@ -44,13 +39,13 @@
                     </g:GradientView>
                 </Grid>
 
-                <Label Text="Los Simpson: Temporada 1" TextColor="White"
+                <Label Text="{Binding TemporadaEpisodios.Temporada.Numero, StringFormat='Los Simpson: Temporada {0}'}" TextColor="White"
                    FontSize="25" FontFamily="Segoe UI"
                    FontAttributes="Bold" Margin="20,-28,0,0"/>
 
                 <StackLayout Orientation="Horizontal" Margin="22,-5,0,0">
-                    <Label Text="14 episodios" TextColor="#BEBEBE" FontFamily="Segoe UI" Margin="0,0,7,0"/>
-                    <Label Text="1989 - 1999" TextColor="#BEBEBE" FontFamily="Segoe UI" />
+                    <Label Text="{Binding TemporadaEpisodios.Temporada.TotalEpisodios, StringFormat='{0} episodios'}" TextColor="#BEBEBE" FontFamily="Segoe UI" Margin="0,0,7,0"/>
+                    <Label Text="{Binding TemporadaEpisodios.Temporada.Periodo}" TextColor="#BEBEBE" FontFamily="Segoe UI" />
                 </StackLayout>
 
 
@@ -59,7 +54,7 @@
                    FontSize="Title" FontFamily="Segoe UI"
                    FontAttributes="Bold" Margin="20,15,0,10"/>
 
-                <CollectionView ItemsSource="{Binding Capitulos}" Margin="15,0">
+                <CollectionView ItemsSource="{Binding TemporadaEpisodios.Episodios}" Margin="15,0">
 
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout Orientation="Vertical" Span="3"/>
@@ -68,6 +63,9 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Grid Padding="5,8">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={x:Reference ventana}, Path=BindingContext.VerEpisodioCommand}" CommandParameter="{Binding .}"/>
+                                </Grid.GestureRecognizers>
                                 <pancake:PancakeView CornerRadius="10" HeightRequest="160" >
                                     <Grid>
                                         <Image Source="{Binding Imagen}" Aspect="AspectFill"/>
@@ -82,11 +80,11 @@
                                         </g:GradientView>
                                         <FlexLayout Direction="Column" JustifyContent="End" Margin="7,10">
                                             <StackLayout Spacing="1">
-                                                <Label Text="{Binding Titulo, Converter={StaticResource Key=tituloConverter}}"
+                                                <Label Text="{Binding Nombre, Converter={StaticResource Key=tituloConverter}}"
                                                TextColor="White" FontSize="Small" FontAttributes="Bold" FontFamily="Segoe UI"/>
 
                                                 <StackLayout Orientation="Horizontal">
-                                                    <Label Text="{Binding Minutos, StringFormat='{0} minutos'}"
+                                                    <Label Text="{Binding Duracion, StringFormat='{0} minutos'}"
                                                    TextColor="White" FontSize="11"/>
                                                 </StackLayout>
                                             </StackLayout>

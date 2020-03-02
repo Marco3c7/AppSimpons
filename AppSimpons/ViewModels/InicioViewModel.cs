@@ -11,60 +11,71 @@ namespace AppSimpons.ViewModels
     public class InicioViewModel
     {
         public ObservableCollection<Temporada> Temporadas { get; set; } = new ObservableCollection<Temporada>();
-        public ObservableCollection<Capitulo> Capitulos { get; set; }
+        public ObservableCollection<Episodio> Episodios { get; set; } = new ObservableCollection<Episodio>();
+
+        public TemporadaEpisodios TemporadaEpisodios { get; set; } = new TemporadaEpisodios();
+        public Episodio Episodio { get; set; } = new Episodio();
 
         public Command VerTemporadasCommand { get; set; }
+        public Command VerEpisodiosCommand { get; set; }
+        public Command<Episodio> VerEpisodioCommand { get; set; }
         public Command<Temporada> VerTemporadaCommand { get; set; }
         public Command CancelarCommand { get; set; }
 
         public InicioViewModel()
         {
+            VerEpisodiosCommand = new Command(VerEpisodios);
+            VerEpisodioCommand = new Command<Episodio>(VerEpisodio);
             VerTemporadasCommand = new Command(VerTemporadas);
             VerTemporadaCommand = new Command<Temporada>(VerTemporada);
             CancelarCommand = new Command(Cancelar);
             Temporadas = App.TheSimpson.GetTemporadas();
-            Capitulos = new ObservableCollection<Capitulo>
+            Episodios = App.TheSimpson.GetUltimosEpisodios();
+        }
+
+        EpisodioView episodioView;
+        private async void VerEpisodio(Episodio e)
+        {
+            if (episodioView == null)
+                episodioView = new EpisodioView();
+
+            if (App.Current.MainPage.Navigation.NavigationStack[App.Current.MainPage.Navigation.NavigationStack.Count - 1].GetType() != episodioView.GetType())
             {
-                new Capitulo
-                {
-                    Titulo = "No puedes conducir mi auto",
-                    Minutos = 22,
-                    Imagen = "http://itesrc.net/simpsons/30x05.jpg"
-                },
-                new Capitulo
-                {
-                    Titulo = "Desde Rusia sin amor",
-                    Minutos = 22,
-                    Imagen = "http://itesrc.net/simpsons/30x06.jpg"
-                },
-                new Capitulo
-                {
-                    Titulo = "Krusty el payaso",
-                    Minutos = 22,
-                    Imagen = "http://itesrc.net/simpsons/30x08.jpg"
-                },
-                new Capitulo
-                {
-                    Titulo = "Es la temporada 30",
-                    Minutos = 22,
-                    Imagen = "http://itesrc.net/simpsons/30x10.jpg"
-                },
-                new Capitulo
-                {
-                    Titulo = "Mis deportes",
-                    Minutos = 22,
-                    Imagen = "http://itesrc.net/simpsons/30x17.jpg"
-                }
-            };
+                Episodio = e;
+                episodioView.BindingContext = null;
+                episodioView.BindingContext = this;
+                await App.Current.MainPage.Navigation.PushAsync(episodioView);
+            }
+        }
+
+        EpisodiosView episodiosView;
+        private async void VerEpisodios()
+        {
+            if (episodiosView == null)
+                episodiosView = new EpisodiosView();
+
+            if(App.Current.MainPage.Navigation.NavigationStack[App.Current.MainPage.Navigation.NavigationStack.Count - 1].GetType() != episodiosView.GetType())
+            {
+                episodiosView.BindingContext = this;
+                await App.Current.MainPage.Navigation.PushAsync(episodiosView);
+            }
         }
 
         TemporadaView temporadaView;
-        private void VerTemporada(Temporada temporada)
+        private async void VerTemporada(Temporada temporada)
         {
             if (temporadaView == null)
                 temporadaView = new TemporadaView();
 
-            App.Current.MainPage.Navigation.PushAsync(temporadaView);
+            if (App.Current.MainPage.Navigation.NavigationStack[App.Current.MainPage.Navigation.NavigationStack.Count - 1].GetType() != temporadaView.GetType())
+            {
+                await App.TheSimpson.DescargarEpisodiosDeTemporada(temporada.Numero);
+
+                TemporadaEpisodios.Temporada = temporada;
+                TemporadaEpisodios.Episodios = App.TheSimpson.GetEpisodiosByNumeroTemporada(temporada.Numero);
+                temporadaView.BindingContext = this;
+                await App.Current.MainPage.Navigation.PushAsync(temporadaView);
+            }
         }
 
         private async void Cancelar()
@@ -78,7 +89,11 @@ namespace AppSimpons.ViewModels
             if (temporadasView == null)
                 temporadasView = new TemporadasView();
 
-            App.Current.MainPage.Navigation.PushAsync(temporadasView);
+            if (App.Current.MainPage.Navigation.NavigationStack[App.Current.MainPage.Navigation.NavigationStack.Count - 1].GetType() != temporadasView.GetType())
+            {
+                temporadasView.BindingContext = this;
+                App.Current.MainPage.Navigation.PushAsync(temporadasView);
+            }
         }
     }
 }

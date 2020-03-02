@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<controls:AnimationPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:FormsControls.Base;assembly=FormsControls.Base"
+             xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"           
+             mc:Ignorable="d"
+             x:Class="AppSimpons.Views.EpisodioView" x:Name="ventana" NavigationPage.HasNavigationBar="False" BackgroundColor="#1E1E1E">
+
+    <controls:AnimationPage.PageAnimation>
+        <controls:FadePageAnimation Duration="Short"/>
+    </controls:AnimationPage.PageAnimation>
+
+    <ScrollView>
+        <Grid>
+            <StackLayout>
+                <Grid BackgroundColor="#3E3E3E">
+                    <Image Source="temporada1full.png" HorizontalOptions="FillAndExpand" Opacity="0.2"/>
+                    <Image Source="gradient.png" HorizontalOptions="FillAndExpand" VerticalOptions="Fill" Aspect="Fill"/>
+                </Grid>
+
+                <!--<pancake:PancakeView WidthRequest="185" HeightRequest="260" VerticalOptions="Start" HorizontalOptions="Center" Padding="0" CornerRadius="6" HasShadow="True"-->
+                <pancake:PancakeView WidthRequest="180" HeightRequest="240" VerticalOptions="Start" HorizontalOptions="Center" Padding="0" CornerRadius="6" HasShadow="True"
+                       Margin="0,-155,0,0">
+                    <Image Source="{Binding Episodio.Imagen}" Aspect="Fill"/>
+                </pancake:PancakeView>
+
+                <Label Text="{Binding Episodio.Nombre}" TextColor="White" HorizontalOptions="Center" Margin="0,3" HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       FontSize="25" FontFamily="Segoe UI"
+                       FontAttributes="None" />
+
+                <Label Text="{Binding Episodio.NombreOriginal}" TextColor="#BEBEBE" HorizontalOptions="Center" Margin="0,-10,0,0" HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                      FontSize="15" FontFamily="Segoe UI" />
+
+                <FlexLayout JustifyContent="SpaceAround" Margin="20,10">
+                    <Label Text="{Binding Episodio.NumeroTemporada, StringFormat='Temporada: {0}'}" TextColor="#BEBEBE" HorizontalOptions="Center"
+                            FontSize="14" FontFamily="Segoe UI" />
+
+                    <Label Text="{Binding Episodio.NumeroEpisodio, StringFormat='Episodio: {0}'}" TextColor="#BEBEBE" HorizontalOptions="Center" 
+                           FontSize="14" FontFamily="Segoe UI" />
+
+                    <Label Text="{Binding Episodio.Duracion, StringFormat='{0} minutos'}" TextColor="#BEBEBE" HorizontalOptions="Center" 
+                           FontSize="14" FontFamily="Segoe UI" />
+
+                    <Label Text="{Binding Episodio.FechaEmision, StringFormat='{0:d}'}" TextColor="#BEBEBE" HorizontalOptions="Center" 
+                           FontSize="14" FontFamily="Segoe UI" />
+                </FlexLayout>
+
+                <Label Text="Sinopsis"
+                       Margin="30,15,0,5" TextColor="White" FontSize="21" LineHeight="1.3"/>
+
+                <Label Text="{Binding Episodio.Sinopsis}"
+                       Margin="30,0,30,0" TextColor="#BEBEBE" FontSize="16" LineHeight="1.2"/>
+
+
+            </StackLayout>
+            <Frame CornerRadius="50" BackgroundColor="Transparent" HorizontalOptions="Start" VerticalOptions="Start" Margin="0,10,0,0">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding CancelarCommand}"/>
+                </Frame.GestureRecognizers>
+                <Image Source="back.png" HeightRequest="22"/>
+            </Frame>
+        </Grid>
+    </ScrollView>
+
+</controls:AnimationPage>

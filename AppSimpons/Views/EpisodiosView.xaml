@@ -3,39 +3,39 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
              xmlns:controls="clr-namespace:FormsControls.Base;assembly=FormsControls.Base"
-             xmlns:g="clr-namespace:MagicGradients;assembly=MagicGradients"
              xmlns:helpers="clr-namespace:AppSimpons.Helpers"
              xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
-             x:Class="AppSimpons.Views.TemporadasView" BackgroundColor="#1E1E1E" x:Name="ventana" NavigationPage.HasNavigationBar="False">
-
+             xmlns:g="clr-namespace:MagicGradients;assembly=MagicGradients"
+             mc:Ignorable="d"
+             x:Class="AppSimpons.Views.EpisodiosView" BackgroundColor="#1E1E1E" x:Name="ventana" NavigationPage.HasNavigationBar="False">
+    
+    
     <controls:AnimationPage.PageAnimation>
         <controls:PushPageAnimation Duration="Short" Subtype="FromRight"/>
     </controls:AnimationPage.PageAnimation>
 
     <controls:AnimationPage.Resources>
-        <helpers:uriToImageConverter x:Key="numeroToImageConverter"/>
+        <helpers:tituloToShortTitulo x:Key="tituloConverter"/>
     </controls:AnimationPage.Resources>
 
     <ScrollView>
         <Grid>
             <StackLayout>
 
-                <Image Source="temporadaswallpaper.png" HorizontalOptions="FillAndExpand"/>
+                <Image Source="episodios.png" HorizontalOptions="FillAndExpand"/>
 
                 <Image Source="logo.png" HeightRequest="90" Margin="0,-55,0,0" HorizontalOptions="Center"/>
 
-                <!--Temporadas-->
-                <Label Text="Temporadas" TextColor="White"
+                <!--Episodios-->
+                <Label Text="Episodios Nuevos" TextColor="White"
                    FontSize="Title" FontFamily="Segoe UI"
                    FontAttributes="Bold" Margin="20,15,0,10"/>
 
 
-                <CollectionView ItemsSource="{Binding Temporadas}" Margin="15,0">
+                <CollectionView ItemsSource="{Binding Capitulos}" Margin="15,0">
 
                     <CollectionView.ItemsLayout>
-                        <!--<GridItemsLayout Orientation="Vertical" Span="3" HorizontalItemSpacing="10" VerticalItemSpacing="14"/>-->
                         <GridItemsLayout Orientation="Vertical" Span="3" />
                     </CollectionView.ItemsLayout>
 
@@ -47,9 +47,8 @@
                                         <TapGestureRecognizer Command="{Binding Source={x:Reference ventana}, Path=BindingContext.VerTemporadaCommand}" CommandParameter="{Binding .}"/>
                                     </pancake:PancakeView.GestureRecognizers>
                                     <Grid>
-                                        <Image Source="{Binding Numero, Converter={StaticResource Key=numeroToImageConverter}}" Aspect="Fill"/>
+                                        <Image Source="{Binding Imagen}" Aspect="Fill"/>
                                         <Image Source="gradientCard.png" Aspect="Fill"/>
-
                                         <!--<g:GradientView Margin="0">
                                             <g:GradientView.GradientSource>
                                                 <g:LinearGradient>
@@ -61,11 +60,11 @@
                                         </g:GradientView>-->
                                         <FlexLayout Direction="Column" JustifyContent="End" Margin="7,10">
                                             <StackLayout Spacing="1">
-                                                <Label Text="{Binding Numero, StringFormat='T{0}'}"
-                                               TextColor="White" FontSize="Subtitle" FontAttributes="Bold" FontFamily="Segoe UI"/>
+                                                <Label Text="{Binding Nombre, Converter={StaticResource Key=tituloConverter}}"
+                                               TextColor="White" FontSize="Small" FontAttributes="Bold" FontFamily="Segoe UI"/>
 
                                                 <StackLayout Orientation="Horizontal">
-                                                    <Label Text="{Binding TotalEpisodios, StringFormat='{0} Capitulos'}"
+                                                    <Label Text="{Binding Duracion, StringFormat='{0} minutos'}"
                                                    TextColor="White" FontSize="11"/>
                                                 </StackLayout>
                                             </StackLayout>
@@ -85,4 +84,4 @@
             </Frame>
         </Grid>
     </ScrollView>
-</controls:AnimationPage>
+    </controls:AnimationPage>

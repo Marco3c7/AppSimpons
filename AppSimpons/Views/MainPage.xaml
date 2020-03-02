@@ -17,6 +17,7 @@
 
     <ContentPage.Resources>
         <helpers:uriToImageConverter x:Key="numeroToImageConverter"/>
+        <helpers:tituloToShortTitulo x:Key="tituloToShortTituloConverter"/>
     </ContentPage.Resources>
 
     <ScrollView>
@@ -52,7 +53,8 @@
                             </pancake:PancakeView.GestureRecognizers>
                             <Grid>
                                 <Image Source="{Binding Numero, Converter={StaticResource Key=numeroToImageConverter}}" Aspect="Fill"/>
-                                <g:GradientView Margin="0">
+                                <Image Source="gradientCard.png" Aspect="Fill"/>
+                                <!--<g:GradientView Margin="0">
                                     <g:GradientView.GradientSource>
                                         <g:LinearGradient>
                                             <g:GradientStop Color="Transparent" Offset="0" />
@@ -60,7 +62,7 @@
                                             <g:GradientStop Color="#242424" Offset="1" />
                                         </g:LinearGradient>
                                     </g:GradientView.GradientSource>
-                                </g:GradientView>
+                                </g:GradientView>-->
                                 <FlexLayout Direction="Column" JustifyContent="End" Margin="10,10">
                                     <StackLayout Spacing="1">
                                         <Label Text="{Binding Numero, StringFormat='Temporada {0}'}"
@@ -70,8 +72,6 @@
                                             <Label Text="{Binding TotalEpisodios, StringFormat='{0} Capitulos'}"
                                                    TextColor="White" FontSize="11"/>
 
-                                            <!--<Label Text="{Binding Periodo}"
-                                                   TextColor="White" FontSize="11"/>-->
                                         </StackLayout>
                                     </StackLayout>
                                 </FlexLayout>
@@ -81,18 +81,21 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <!--Capitulos-->
+            <!--Episodios-->
             <FlexLayout Direction="Row" JustifyContent="SpaceBetween" Margin="30,15,0,0" AlignItems="Center">
-                <Label Text="Episodios" TextColor="White"
+                <Label Text="Episodios Nuevos" TextColor="White"
                    FontSize="Title" FontFamily="Segoe UI"
                    FontAttributes="Bold"/>
 
                 <Frame CornerRadius="50" BackgroundColor="Transparent" >
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding VerEpisodiosCommand}"/>
+                    </Frame.GestureRecognizers>
                     <Image Source="go.png" HeightRequest="22" />
                 </Frame>
             </FlexLayout>
 
-            <CollectionView ItemsSource="{Binding Capitulos}" HeightRequest="240" Margin="20,0,0,20">
+            <CollectionView ItemsSource="{Binding Episodios}" HeightRequest="240" Margin="20,0,0,20">
 
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Orientation="Horizontal" Span="1" HorizontalItemSpacing="14"/>
@@ -102,9 +105,14 @@
                     <DataTemplate>
 
                         <pancake:PancakeView CornerRadius="10" WidthRequest="150">
+                            <pancake:PancakeView.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={x:Reference ventana}, Path=BindingContext.VerEpisodioCommand}" CommandParameter="{Binding .}"/>
+                            </pancake:PancakeView.GestureRecognizers>
                             <Grid>
                                 <Image Source="{Binding Imagen}" Aspect="AspectFill"/>
-                                <g:GradientView Margin="0">
+                                <Image Source="gradientCard.png" Aspect="Fill"/>
+
+                                <!--<g:GradientView Margin="0">
                                     <g:GradientView.GradientSource>
                                         <g:LinearGradient>
                                             <g:GradientStop Color="Transparent" Offset="0" />
@@ -112,14 +120,14 @@
                                             <g:GradientStop Color="#242424" Offset="1" />
                                         </g:LinearGradient>
                                     </g:GradientView.GradientSource>
-                                </g:GradientView>
+                                </g:GradientView>-->
                                 <FlexLayout Direction="Column" JustifyContent="End" Margin="10,10">
                                     <StackLayout Spacing="1">
-                                        <Label Text="{Binding Titulo}"
+                                        <Label Text="{Binding Nombre, Converter={StaticResource tituloToShortTituloConverter}}"
                                                TextColor="White" FontSize="Subtitle" FontAttributes="Bold" FontFamily="Segoe UI"/>
 
                                         <StackLayout Orientation="Horizontal">
-                                            <Label Text="{Binding Minutos, StringFormat='{0} minutos'}"
+                                            <Label Text="{Binding Duracion, StringFormat='{0} minutos'}"
                                                    TextColor="White" FontSize="11"/>
                                         </StackLayout>
                                     </StackLayout>
